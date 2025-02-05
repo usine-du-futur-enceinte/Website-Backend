@@ -20,5 +20,5 @@ npm run dev
 # Environment variables
 ```
 PORT=3030
-MONGO_URI=
+MONGO_URI=mongodb+srv://[DB_USERNAME]:[DB_PASSWORD]@usinedufutur.ltjag.mongodb.net/
 ```
