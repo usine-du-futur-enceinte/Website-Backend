@@ -1,6 +1,7 @@
 import request from "supertest";
 import { app, server } from "../src/server";
 import { connectTestDB, closeTestDB } from "./setup";
+import crypto from "crypto";
 
 beforeAll(async () => {
   await connectTestDB();
@@ -15,7 +16,7 @@ describe("Auth API", () => {
   test("devrait inscrire un utilisateur", async () => {
     const res = await request(app).post("/register").send({
       email: "test@example.com",
-      password: "Test1234!",
+      password: crypto.createHash("sha256").update("Test1234!").digest("hex"),
     });
 
     expect(res.statusCode).toBe(201);
@@ -24,12 +25,12 @@ describe("Auth API", () => {
   test("ne devrait pas inscrire un utilisateur avec un email déjà existant", async () => {
     await request(app).post("/register").send({
       email: "test@example.com",
-      password: "Test1234!",
+      password: crypto.createHash("sha256").update("Test1234!").digest("hex"),
     });
 
     const res = await request(app).post("/register").send({
       email: "test@example.com",
-      password: "DifferentPassword123!",
+      password: crypto.createHash("sha256").update("DifferentPassword123!").digest("hex"),
     });
 
     expect(res.statusCode).toBe(400);
@@ -38,12 +39,12 @@ describe("Auth API", () => {
   test("devrait connecter un utilisateur avec de bons identifiants", async () => {
     await request(app).post("/register").send({
       email: "testuser@example.com",
-      password: "SecurePass123!",
+      password: crypto.createHash("sha256").update("SecurePass123!").digest("hex"),
     });
 
     const res = await request(app).post("/login").send({
       email: "testuser@example.com",
-      password: "SecurePass123!",
+      password: crypto.createHash("sha256").update("SecurePass123!").digest("hex"),
     });
 
     expect(res.statusCode).toBe(200);
@@ -52,12 +53,12 @@ describe("Auth API", () => {
   test("ne devrait pas connecter un utilisateur avec un mauvais mot de passe", async () => {
     await request(app).post("/register").send({
       email: "anotheruser@example.com",
-      password: "RightPass123!",
+      password: crypto.createHash("sha256").update("RightPass123!").digest("hex"),
     });
 
     const res = await request(app).post("/login").send({
       email: "anotheruser@example.com",
-      password: "WrongPass!",
+      password: crypto.createHash("sha256").update("WrongPass!").digest("hex"),
     });
 
     expect(res.statusCode).toBe(401);
