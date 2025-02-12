@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "target": "ES6",
+    "module": "CommonJS",
+    "strict": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
     "esModuleInterop": true,
-    "target": "es6",
     "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "dist"
+    "sourceMap": true
   },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.test.ts"],
   "lib": ["es2015"]
 }

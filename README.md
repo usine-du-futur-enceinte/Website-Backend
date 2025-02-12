@@ -22,3 +22,19 @@ npm run dev
 PORT=3030
 MONGO_URI=mongodb+srv://[DB_USERNAME]:[DB_PASSWORD]@usinedufutur.ltjag.mongodb.net/
 ```
+
+# Environment variables for tests
+```
+NODE_ENV=test
+PORT=3030
+```
+
+# Run the tests
+```
+npm test
+```
+
+# Run the tests in watch mode
+```
+npm run test:watch
+```
