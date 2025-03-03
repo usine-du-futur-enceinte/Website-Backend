@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
-import authRoutes from "./routes/auth.route";
+import authRoutes from "./routes/auth.routes";
+import orderRoutes from "./routes/order.routes";
 
 dotenv.config();
 const PORT = process.env.PORT || 3030;
@@ -25,6 +26,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use(authRoutes);
+app.use(orderRoutes);
 
 
 const server = app.listen(PORT, () => {

@@ -1,6 +1,6 @@
 # Website-Backend
 
-API for usine-du-futur project
+API for usine du futur project
 
 ```
 git clone https://github.com/usine-du-futur-enceinte/Website-Backend.git
@@ -13,6 +13,11 @@ npm install
 ```
 
 # Run the server
+```
+npm start
+```
+
+# Run the server in development mode
 ```
 npm run dev
 ```

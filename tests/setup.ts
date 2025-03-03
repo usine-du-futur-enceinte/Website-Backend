@@ -7,7 +7,7 @@ export const connectTestDB = async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
 
-  if (mongoose.connection.readyState === 0) {  // Vérifie qu'il n'est pas déjà connecté
+  if (mongoose.connection.readyState === 0) { 
     await mongoose.connect(mongoUri);
   }
 };

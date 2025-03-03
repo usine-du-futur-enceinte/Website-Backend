@@ -2,6 +2,7 @@ import request from "supertest";
 import { app, server } from "../src/server";
 import { connectTestDB, closeTestDB } from "./setup";
 import crypto from "crypto";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 beforeAll(async () => {
   await connectTestDB();
@@ -48,6 +49,11 @@ describe("Auth API", () => {
     });
 
     expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty("accessToken");
+    const decoded = jwt.verify(res.body.accessToken, process.env.JWT_SECRET || "secret_key") as JwtPayload;
+    console.log("User ID:", decoded.id);
+
+    expect(decoded).toHaveProperty("id"); // Vérifie que l'ID est bien présent
   });
 
   test("ne devrait pas connecter un utilisateur avec un mauvais mot de passe", async () => {
