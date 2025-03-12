@@ -68,5 +68,16 @@ describe("Auth API", () => {
     });
 
     expect(res.statusCode).toBe(401);
+    expect(res.body).toHaveProperty("message", "Mot de passe incorrect");
+  });
+
+  test("ne devrait pas connecter un utilisateur avec une mauvaise adresse email", async () => {
+    const res = await request(app).post("/login").send({
+      email: "nonexistentuser@example.com",
+      password: crypto.createHash("sha256").update("SomePassword123!").digest("hex"),
+    });
+  
+    expect(res.statusCode).toBe(401);
+    expect(res.body).toHaveProperty("message", "Email incorrect");
   });
 });

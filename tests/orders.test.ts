@@ -112,6 +112,29 @@ describe("Tests API Orders", () => {
     expect(response.body.message).toBe("Accès non autorisé");
   });
 
+  it("❌ Devrait refuser une création de commande avec un token invalide", async () => {
+    const orderData = {
+      totalPrice: 100,
+      deliveryAddress: "123 Test St, Test City, TC",
+      products: [
+        { name: "Product 1", price: 50, quantity: 1 },
+        { name: "Product 2", price: 50, quantity: 1 }
+      ]
+    };
+  
+    // Création d'un token invalide (par exemple, une chaîne au hasard)
+    const invalidToken = "invalid.token.value";
+  
+    const response = await request(app)
+      .post("/createOrder")
+      .set("Authorization", `Bearer ${invalidToken}`)
+      .send(orderData); // Envoi de la commande avec un token invalide
+  
+    // Vérification du statut 403 et du message d'erreur
+    expect(response.statusCode).toBe(403);
+    expect(response.body.message).toBe("Token invalide");
+  });
+
   it("✅ Devrait récupérer les commandes d'un utilisateur (GET /orders)", async () => {
     const response = await request(app)
       .get("/orders")
@@ -199,7 +222,7 @@ describe("Tests API Orders", () => {
     // Vérifie que la date est bien une chaîne et qu'elle correspond à un format ISO 8601
     expect(typeof response.body.date).toBe("string");
     expect(new Date(response.body.date).toISOString()).toBe(response.body.date);
-  });
+  }); 
 
   it("❌ Devrait échouer si les données de commande sont invalides (POST /createOrder)", async () => {
     const invalidOrderData = {
