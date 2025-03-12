@@ -53,12 +53,20 @@ npm start
 
 ## 🔬 Tests
 
-### 1️⃣ Lancer les tests
+### 1️⃣ Configurer les variables d’environnement de test
+Créer un fichier `.env.test` à la racine du projet et ajouter les variables d’environnement suivantes :
+```env
+NODE_ENV=test
+PORT=3030
+MONGO_URI=mongodb+srv://[DB_USERNAME]:[DB_PASSWORD]@usinedufutur.ltjag.mongodb.net/
+```
+
+### 2️⃣ Lancer les tests
 ```sh
 npm test
 ```
 
-### 2️⃣ Générer un rapport de couverture
+### 3️⃣ Générer un rapport de couverture
 ```sh
 npm run test:coverage
 ```
