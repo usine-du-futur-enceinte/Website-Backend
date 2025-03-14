@@ -59,6 +59,7 @@ Créer un fichier `.env.test` à la racine du projet et ajouter les variables d�
 NODE_ENV=test
 PORT=3030
 MONGO_URI=mongodb+srv://[DB_USERNAME]:[DB_PASSWORD]@usinedufutur.ltjag.mongodb.net/
+TEST_DB_URI=mongodb+srv://[DB_USERNAME]:[DB_PASSWORD]@usinedufutur.ltjag.mongodb.net/BowlBox3000
 ```
 
 ### 2️⃣ Lancer les tests
@@ -84,18 +85,14 @@ Website-Backend/
  ├── app.ts            # Point d'entrée Express
  └── server.ts         # Lancement du serveur
 │── 📂 tests/            # Tests unitaires et d'intégration
-│── 📂coverage/               # Rapport de couverture des tests
+│── 📂 coverage/               # Rapport de couverture des tests
 │── package.json            # Dépendances et scripts npm
 │── tsconfig.json           # Configuration TypeScript
-│── .env.example            # Exemple de configuration
 │── README.md               # Documentation du projet
 ```
 
 ## 📖 Documentation API
-### 🔹 Accéder à Swagger :
-Démarrer le serveur et ouvrir http://localhost:3030/api-docs.
-
-Swagger est configuré pour générer automatiquement la documentation à partir des routes.
+### 🔹 Une documentation swagger existe sur la route /api-docs ou https://back-end-website-bowlbox3000.onrender.com/api-docs/
 
 ## 🔧 Technologies Utilisées
 - Node.js + Express.js
@@ -112,6 +109,3 @@ Swagger est configuré pour générer automatiquement la documentation à partir
 3. Commit (git commit -m "Ajout d'une nouvelle feature") 🔥
 4. Pousser (git push origin feature-nouvelle-feature) 🚀
 5. Ouvrir une Pull Request 📩
-
-## 📝 License
-Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
